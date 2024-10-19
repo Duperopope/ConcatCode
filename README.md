@@ -331,8 +331,3 @@ Thank you for checking out **Project Version Manager**! Your support and feedbac
 
 **[![Open Source Love](https://badges.frapsoft.com/os/v1/open-source.png?v=103)](https://opensource.org/) [![GitHub Stars](https://img.shields.io/github/stars/your_username/ProjectVersionManager?style=social)](https://github.com/your_username/ProjectVersionManager)**
 
-
-
----
-
-Feel free to share your thoughts, ask questions, or suggest improvements in the comments below!
