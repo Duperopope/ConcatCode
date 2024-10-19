@@ -3,7 +3,10 @@ import os
 import shutil
 import zipfile
 from datetime import datetime
-from PyQt5.QtWidgets import QApplication, QMainWindow, QPushButton, QLabel, QComboBox, QMessageBox, QFileDialog, QWidget, QVBoxLayout
+from PyQt5.QtWidgets import (
+    QApplication, QMainWindow, QPushButton, QLabel, QComboBox,
+    QMessageBox, QFileDialog, QWidget, QVBoxLayout
+)
 from PyQt5.QtCore import Qt
 
 class VersionManagerApp(QMainWindow):
@@ -12,10 +15,11 @@ class VersionManagerApp(QMainWindow):
         self.init_ui()
 
     def init_ui(self):
-        self.setWindowTitle('Gestion des Versions du Projet')
+        # Set the window title and size
+        self.setWindowTitle('Project Version Manager')
         self.setGeometry(200, 200, 400, 300)
 
-        # Style général de l'interface avec QSS (similaire à CSS)
+        # General style using QSS (similar to CSS)
         self.setStyleSheet("""
             QMainWindow {
                 background-color: #1b2a38;
@@ -43,81 +47,81 @@ class VersionManagerApp(QMainWindow):
             }
         """)
 
-        # Créer un layout vertical pour les éléments de l'interface
+        # Create a vertical layout for the interface elements
         self.main_widget = QWidget()
         self.setCentralWidget(self.main_widget)
         self.layout = QVBoxLayout()
         self.main_widget.setLayout(self.layout)
 
-        # Ajouter un titre
-        self.title_label = QLabel('Gestion des Versions du Projet', self)
+        # Add a title label
+        self.title_label = QLabel('Project Version Manager', self)
         self.title_label.setAlignment(Qt.AlignCenter)
         self.layout.addWidget(self.title_label)
 
-        # Ajouter les boutons
-        self.sauvegarder_btn = QPushButton('Sauvegarder la version', self)
-        self.sauvegarder_btn.clicked.connect(self.sauvegarder_version)
-        self.layout.addWidget(self.sauvegarder_btn)
+        # Add buttons for different actions
+        self.save_btn = QPushButton('Save Version', self)
+        self.save_btn.clicked.connect(self.save_version)
+        self.layout.addWidget(self.save_btn)
 
-        self.restaurer_btn = QPushButton('Restaurer une version', self)
-        self.restaurer_btn.clicked.connect(self.restaurer_version)
-        self.layout.addWidget(self.restaurer_btn)
+        self.restore_btn = QPushButton('Restore Version', self)
+        self.restore_btn.clicked.connect(self.restore_version)
+        self.layout.addWidget(self.restore_btn)
 
-        self.archiver_btn = QPushButton('Archiver une version', self)
-        self.archiver_btn.clicked.connect(self.archiver_version)
-        self.layout.addWidget(self.archiver_btn)
+        self.archive_btn = QPushButton('Archive Version', self)
+        self.archive_btn.clicked.connect(self.archive_version)
+        self.layout.addWidget(self.archive_btn)
 
-        self.extraire_btn = QPushButton('Extraire une version d\'un ZIP', self)
-        self.extraire_btn.clicked.connect(self.extraire_version)
-        self.layout.addWidget(self.extraire_btn)
+        self.extract_btn = QPushButton('Extract Version from ZIP', self)
+        self.extract_btn.clicked.connect(self.extract_version)
+        self.layout.addWidget(self.extract_btn)
 
-    # Fonction pour sauvegarder une nouvelle version
-    def sauvegarder_version(self):
+    # Function to save a new version
+    def save_version(self):
         try:
-            self.concat_cs_files_to_txt()
-            QMessageBox.information(self, 'Succès', 'Nouvelle version sauvegardée avec succès.')
+            self.concat_files_to_txt()
+            QMessageBox.information(self, 'Success', 'New version saved successfully.')
         except Exception as e:
-            QMessageBox.critical(self, 'Erreur', f'Erreur lors de la sauvegarde : {str(e)}')
+            QMessageBox.critical(self, 'Error', f'Error while saving: {str(e)}')
 
-    # Fonction pour restaurer une version
-    def restaurer_version(self):
+    # Function to restore a version
+    def restore_version(self):
         versions = self.get_versions_list()
         if not versions:
-            QMessageBox.warning(self, 'Aucune version', 'Aucune version disponible pour restauration.')
+            QMessageBox.warning(self, 'No Versions', 'No versions available for restoration.')
             return
 
-        version, ok = self.select_version(versions, "Restaurer")
+        version, ok = self.select_version(versions, "Restore")
         if ok:
-            self.restore_version(version)
-            QMessageBox.information(self, 'Succès', f'Version {version} restaurée avec succès.')
+            self.perform_restore(version)
+            QMessageBox.information(self, 'Success', f'Version {version} restored successfully.')
 
-    # Fonction pour archiver une version
-    def archiver_version(self):
+    # Function to archive a version
+    def archive_version(self):
         versions = self.get_versions_list()
         if not versions:
-            QMessageBox.warning(self, 'Aucune version', 'Aucune version disponible pour archivage.')
+            QMessageBox.warning(self, 'No Versions', 'No versions available for archiving.')
             return
 
-        version, ok = self.select_version(versions, "Archiver")
+        version, ok = self.select_version(versions, "Archive")
         if ok:
-            self.archive_version(version)
-            QMessageBox.information(self, 'Succès', f'Version {version} archivée avec succès.')
+            self.perform_archive(version)
+            QMessageBox.information(self, 'Success', f'Version {version} archived successfully.')
 
-    # Fonction pour extraire une version à partir d'un fichier ZIP
-    def extraire_version(self):
-        zip_file, _ = QFileDialog.getOpenFileName(self, 'Choisir un fichier ZIP', '', 'Fichiers ZIP (*.zip)')
+    # Function to extract a version from a ZIP file
+    def extract_version(self):
+        zip_file, _ = QFileDialog.getOpenFileName(self, 'Choose a ZIP file', '', 'ZIP Files (*.zip)')
         if zip_file:
-            self.extract_version(zip_file)
-            QMessageBox.information(self, 'Succès', 'Fichiers extraits avec succès.')
+            self.perform_extract(zip_file)
+            QMessageBox.information(self, 'Success', 'Files extracted successfully.')
 
-    # Utilitaire pour sélectionner une version
+    # Utility function to select a version from available versions
     def select_version(self, versions, action_name):
         combo = QComboBox(self)
         combo.addItems(versions)
 
         msg_box = QMessageBox(self)
-        msg_box.setWindowTitle(action_name + " une version")
-        msg_box.setText("Sélectionnez une version :")
+        msg_box.setWindowTitle(f"{action_name} a Version")
+        msg_box.setText("Select a version:")
         msg_box.layout().addWidget(combo)
         msg_box.addButton(QMessageBox.Ok)
         msg_box.addButton(QMessageBox.Cancel)
@@ -128,14 +132,14 @@ class VersionManagerApp(QMainWindow):
             return combo.currentText(), True
         return None, False
 
-    # Liste des versions disponibles
+    # Function to get a list of available versions
     def get_versions_list(self):
         script_dir = os.path.dirname(os.path.abspath(__file__))
         versions = [folder for folder in os.listdir(script_dir) if folder.startswith('version_')]
         return versions
 
-    # Fonction de sauvegarde (similaire au code précédent)
-    def concat_cs_files_to_txt(self):
+    # Function to concatenate code files into a single text file
+    def concat_files_to_txt(self):
         current_datetime = datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
         script_dir = os.path.dirname(os.path.abspath(__file__))
         version = self.get_next_version(script_dir)
@@ -149,16 +153,24 @@ class VersionManagerApp(QMainWindow):
 
         output_file = os.path.join(version_folder, f"concat_files_v{version}_{current_datetime}.txt")
 
+        # Write header information to the output file
         with open(output_file, 'w', encoding='utf-8') as outfile:
             outfile.write(f"// Version: {version}\n")
             outfile.write(f"// Date: {current_datetime}\n")
             outfile.write("=" * 50 + "\n")
 
+        # File extensions to process (common programming languages)
+        extensions = (
+            '.py', '.java', '.c', '.cpp', '.cs', '.js', '.ts',
+            '.html', '.css', '.php', '.rb', '.go', '.swift', '.kt', '.rs'
+        )
+
+        # Walk through the project directory and process files
         for foldername, subfolders, filenames in os.walk(project_dir):
             for filename in filenames:
-                if filename.endswith(".cs"):
+                if filename.endswith(extensions):
                     file_path = os.path.join(foldername, filename)
-                    with open(file_path, 'r', encoding='utf-8') as infile:
+                    with open(file_path, 'r', encoding='utf-8', errors='ignore') as infile:
                         with open(output_file, 'a', encoding='utf-8') as outfile:
                             outfile.write(f"\n// File: {filename}\n")
                             outfile.write(infile.read())
@@ -167,6 +179,7 @@ class VersionManagerApp(QMainWindow):
                     destination_file = os.path.join(source_copy_folder, f"{filename}.txt")
                     shutil.copy(file_path, destination_file)
 
+        # Create a ZIP backup of the project
         zip_file_name = os.path.join(version_folder, f"backup_project_v{version}_{current_datetime}.zip")
         with zipfile.ZipFile(zip_file_name, 'w', zipfile.ZIP_DEFLATED) as backup_zip:
             for foldername, subfolders, filenames in os.walk(project_dir):
@@ -176,7 +189,7 @@ class VersionManagerApp(QMainWindow):
                         arcname = os.path.relpath(file_path, project_dir)
                         backup_zip.write(file_path, arcname)
 
-    # Fonction pour obtenir la prochaine version disponible
+    # Function to get the next available version number
     def get_next_version(self, script_dir):
         version_folders = [folder for folder in os.listdir(script_dir) if folder.startswith('version_')]
         versions = []
@@ -191,19 +204,22 @@ class VersionManagerApp(QMainWindow):
             return "0.01"
         return f"{max(versions) + 0.01:.2f}"
 
-    # Fonction pour restaurer une version
-    def restore_version(self, version):
+    # Function to restore a version
+    def perform_restore(self, version):
         script_dir = os.path.dirname(os.path.abspath(__file__))
         version_folder = os.path.join(script_dir, version)
         project_dir = os.path.abspath(os.path.join(script_dir, '..'))
-        for foldername, subfolders, filenames in os.walk(version_folder):
+        source_copy_folder = os.path.join(version_folder, "Source")
+
+        # Restore each file from the version's source copy
+        for foldername, subfolders, filenames in os.walk(source_copy_folder):
             for filename in filenames:
                 source_file = os.path.join(foldername, filename)
                 dest_file = os.path.join(project_dir, filename.replace(".txt", ""))
                 shutil.copy(source_file, dest_file)
 
-    # Fonction pour archiver une version
-    def archive_version(self, version):
+    # Function to archive a version
+    def perform_archive(self, version):
         script_dir = os.path.dirname(os.path.abspath(__file__))
         version_folder = os.path.join(script_dir, version)
         archive_folder = os.path.join(script_dir, "Archived_Versions")
@@ -212,8 +228,8 @@ class VersionManagerApp(QMainWindow):
         shutil.make_archive(archive_path.replace('.zip', ''), 'zip', version_folder)
         shutil.rmtree(version_folder)
 
-    # Fonction pour extraire une version d'un fichier ZIP
-    def extract_version(self, zip_file):
+    # Function to extract a version from a ZIP file
+    def perform_extract(self, zip_file):
         script_dir = os.path.dirname(os.path.abspath(__file__))
         extract_folder = os.path.join(script_dir, "extracted_version")
         with zipfile.ZipFile(zip_file, 'r') as zip_ref:
