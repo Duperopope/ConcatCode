@@ -1,0 +1,46 @@
+2024-10-19 17:38:36 - ERROR - Failed to concatenate and backup files.
+Traceback (most recent call last):
+  File "c:\Users\Shadow\Documents\GitHub\ConcatCode\Concatcode.py", line 256, in concat_files_to_txt
+    shutil.copy(file_path, destination_file)
+  File "C:\Program Files\WindowsApps\PythonSoftwareFoundation.Python.3.12_3.12.2032.0_x64__qbz5n2kfra8p0\Lib\shutil.py", line 435, in copy
+    copyfile(src, dst, follow_symlinks=follow_symlinks)
+  File "C:\Program Files\WindowsApps\PythonSoftwareFoundation.Python.3.12_3.12.2032.0_x64__qbz5n2kfra8p0\Lib\shutil.py", line 240, in copyfile
+    raise SameFileError("{!r} and {!r} are the same file".format(src, dst))
+shutil.SameFileError: 'c:\\Users\\Shadow\\Documents\\GitHub\\ConcatCode\\version_0.02_2024-10-19_17-38-36\\Source\\Concatcode.py' and 'c:\\Users\\Shadow\\Documents\\GitHub\\ConcatCode\\version_0.02_2024-10-19_17-38-36\\Source\\Concatcode.py' are the same file
+2024-10-19 17:38:36 - ERROR - Failed to save version.
+Traceback (most recent call last):
+  File "c:\Users\Shadow\Documents\GitHub\ConcatCode\Concatcode.py", line 101, in save_version
+    self.concat_files_to_txt()
+  File "c:\Users\Shadow\Documents\GitHub\ConcatCode\Concatcode.py", line 270, in concat_files_to_txt
+    raise e  # Re-raise the exception to be caught by the caller
+    ^^^^^^^
+  File "c:\Users\Shadow\Documents\GitHub\ConcatCode\Concatcode.py", line 256, in concat_files_to_txt
+    shutil.copy(file_path, destination_file)
+  File "C:\Program Files\WindowsApps\PythonSoftwareFoundation.Python.3.12_3.12.2032.0_x64__qbz5n2kfra8p0\Lib\shutil.py", line 435, in copy
+    copyfile(src, dst, follow_symlinks=follow_symlinks)
+  File "C:\Program Files\WindowsApps\PythonSoftwareFoundation.Python.3.12_3.12.2032.0_x64__qbz5n2kfra8p0\Lib\shutil.py", line 240, in copyfile
+    raise SameFileError("{!r} and {!r} are the same file".format(src, dst))
+shutil.SameFileError: 'c:\\Users\\Shadow\\Documents\\GitHub\\ConcatCode\\version_0.02_2024-10-19_17-38-36\\Source\\Concatcode.py' and 'c:\\Users\\Shadow\\Documents\\GitHub\\ConcatCode\\version_0.02_2024-10-19_17-38-36\\Source\\Concatcode.py' are the same file
+2024-10-19 17:40:45 - ERROR - Failed to concatenate and backup files.
+Traceback (most recent call last):
+  File "c:\Users\Shadow\Documents\GitHub\ConcatCode\Concatcode.py", line 367, in concat_files_to_txt
+    shutil.copy(file_path, destination_file)
+  File "C:\Program Files\WindowsApps\PythonSoftwareFoundation.Python.3.12_3.12.2032.0_x64__qbz5n2kfra8p0\Lib\shutil.py", line 435, in copy
+    copyfile(src, dst, follow_symlinks=follow_symlinks)
+  File "C:\Program Files\WindowsApps\PythonSoftwareFoundation.Python.3.12_3.12.2032.0_x64__qbz5n2kfra8p0\Lib\shutil.py", line 240, in copyfile
+    raise SameFileError("{!r} and {!r} are the same file".format(src, dst))
+shutil.SameFileError: 'c:\\Users\\Shadow\\Documents\\GitHub\\ConcatCode\\version_0.03_2024-10-19_17-40-45\\Source\\Concatcode.py' and 'c:\\Users\\Shadow\\Documents\\GitHub\\ConcatCode\\version_0.03_2024-10-19_17-40-45\\Source\\Concatcode.py' are the same file
+2024-10-19 17:40:45 - ERROR - Failed to save version.
+Traceback (most recent call last):
+  File "c:\Users\Shadow\Documents\GitHub\ConcatCode\Concatcode.py", line 101, in save_version
+    self.concat_files_to_txt()
+  File "c:\Users\Shadow\Documents\GitHub\ConcatCode\Concatcode.py", line 381, in concat_files_to_txt
+    raise e  # Re-raise the exception to be caught by the caller
+    ^^^^^^^
+  File "c:\Users\Shadow\Documents\GitHub\ConcatCode\Concatcode.py", line 367, in concat_files_to_txt
+    shutil.copy(file_path, destination_file)
+  File "C:\Program Files\WindowsApps\PythonSoftwareFoundation.Python.3.12_3.12.2032.0_x64__qbz5n2kfra8p0\Lib\shutil.py", line 435, in copy
+    copyfile(src, dst, follow_symlinks=follow_symlinks)
+  File "C:\Program Files\WindowsApps\PythonSoftwareFoundation.Python.3.12_3.12.2032.0_x64__qbz5n2kfra8p0\Lib\shutil.py", line 240, in copyfile
+    raise SameFileError("{!r} and {!r} are the same file".format(src, dst))
+shutil.SameFileError: 'c:\\Users\\Shadow\\Documents\\GitHub\\ConcatCode\\version_0.03_2024-10-19_17-40-45\\Source\\Concatcode.py' and 'c:\\Users\\Shadow\\Documents\\GitHub\\ConcatCode\\version_0.03_2024-10-19_17-40-45\\Source\\Concatcode.py' are the same file

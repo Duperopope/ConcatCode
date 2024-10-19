@@ -1,279 +1,338 @@
-# Project Version Manager
+# 🚀 Project Version Manager: Your Ultimate GUI Tool for Efficient Version Control 🚀
 
-A desktop application to manage versions of your projects by saving, restoring, archiving, and extracting code files across multiple programming languages.
+**[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)**
 
-## Table of Contents
+Hello Reddit community!
 
-- [Features](#features)
-- [Prerequisites](#prerequisites)
-- [Installation](#installation)
-- [Usage](#usage)
-  - [Saving a Version](#saving-a-version)
-  - [Restoring a Version](#restoring-a-version)
-  - [Archiving a Version](#archiving-a-version)
-  - [Extracting a Version from ZIP](#extracting-a-version-from-zip)
-- [Supported Languages](#supported-languages)
-- [Building Executables](#building-executables)
-  - [Windows](#windows)
-  - [Linux](#linux)
-  - [macOS](#macos)
-- [Contributing](#contributing)
-- [License](#license)
+I'm excited to introduce **Project Version Manager**, an open-source GUI application designed to simplify and enhance your project versioning and backup management. Whether you're a developer, writer, designer, or anyone managing multiple versions of files, this tool is tailored to meet your needs.
 
-## Features
+---
 
-- **Save Versions**: Save snapshots of your project, concatenating code files into a single text file.
-- **Restore Versions**: Restore your project to a previously saved state.
-- **Archive Versions**: Archive saved versions to save space.
-- **Extract Versions**: Extract archived versions from ZIP files.
-- **Multi-language Support**: Handles code files from multiple programming languages.
+## 📌 Table of Contents
 
-## Prerequisites
+- [🌟 Features](#-features)
+- [🔧 Installation](#-installation)
+- [🛠️ Usage](#️-usage)
+- [⚙️ Building Executables](#️-building-executables)
+- [🐛 Troubleshooting](#-troubleshooting)
+- [🤝 Contributing](#-contributing)
+- [📄 License](#-license)
+- [📫 Contact](#-contact)
 
-- **Python 3.6 or higher**
-- **PyQt5**: For the graphical user interface.
-- **PyInstaller**: (Optional) For building executables.
+---
 
-## Installation
+## 🌟 Features
 
-1. **Clone the Repository**:
+- **Save Version:** Capture the current state of your project by saving all relevant source files into a single text file and creating a ZIP backup.
+- **Restore Version:** Easily revert your project to any previously saved version.
+- **Archive Version:** Compress and archive specific versions for long-term storage.
+- **Extract Version from ZIP:** Extract project versions from existing ZIP files seamlessly.
+- **User-Friendly GUI:** Built with PyQt5, offering an intuitive interface for effortless navigation and operation.
+
+---
+
+## 🔧 Installation
+
+### 📝 Prerequisites
+
+Ensure your system meets the following requirements:
+
+- **Operating System:** Windows, Mac OS, or Linux.
+- **Python:** Version 3.6 or higher.
+- **pip:** Python package installer.
+
+### 🛠️ Setting Up the Environment
+
+It's recommended to use a virtual environment to manage dependencies:
+
+1. **Install Python:**
+
+   - **Windows & Mac OS:**
+     - Download from the [official Python website](https://www.python.org/downloads/).
+     - Run the installer and **ensure "Add Python to PATH" is checked**.
+
+   - **Linux:**
+     - Verify installation:
+       ```bash
+       python3 --version
+       ```
+     - If not installed, use your distribution's package manager. For example, on Ubuntu:
+       ```bash
+       sudo apt update
+       sudo apt install python3 python3-venv python3-pip
+       ```
+
+2. **Create and Activate a Virtual Environment:**
 
    ```bash
-   git clone https://github.com/yourusername/project-version-manager.git
-   cd project-version-manager
+   cd /path/to/ProjectVersionManager
+   python3 -m venv venv
    ```
 
-2. **Install Dependencies**:
+   - **Windows:**
+     ```bash
+     venv\Scripts\activate
+     ```
+   - **Mac OS & Linux:**
+     ```bash
+     source venv/bin/activate
+     ```
 
-   ```bash
-   pip install -r requirements.txt
-   ```
+   *(Your terminal should show `(venv)` indicating the environment is active.)*
 
-   *If `requirements.txt` is not available, install manually:*
+### 📦 Installing Dependencies
 
-   ```bash
-   pip install PyQt5
-   ```
-
-## Usage
-
-Run the application using:
+With the virtual environment activated, install the required packages:
 
 ```bash
-python version_manager.py
+pip install -r requirements.txt
 ```
 
-Replace `version_manager.py` with the name of your script if different.
+*If `requirements.txt` is unavailable:*
 
-### Application Interface
+```bash
+pip install PyQt5
+```
 
-Upon launching, you'll see a window with the following options:
+---
 
-- **Save Version**: Saves the current state of your project.
-- **Restore Version**: Restores your project to a selected saved version.
-- **Archive Version**: Archives a saved version into a ZIP file and removes the original folder.
-- **Extract Version from ZIP**: Extracts a version from a ZIP file.
+## 🛠️ Usage
 
-### Directory Structure
+After installation, run the application with:
 
-- **Project Directory**: The parent directory of the script. The script assumes your project files are located one level up from where the script resides.
-- **Version Folders**: Saved versions are stored in folders named `version_X.XX_YYYY-MM-DD_HH-MM-SS`.
+```bash
+python Concatcode.py
+```
 
-### Saving a Version
+**Note:** Ensure you're in the project directory and the virtual environment is active.
 
-1. Click **Save Version**.
-2. The application will:
-   - Concatenate all code files into a single text file.
-   - Copy individual code files into a `Source` folder.
-   - Create a ZIP backup of your project.
-3. A success message will appear upon completion.
+### 🖥️ Application Overview
 
-### Restoring a Version
+- **Save Version:** Click to save the current project state.
+- **Restore Version:** Select and restore from available versions.
+- **Archive Version:** Choose a version to archive.
+- **Extract Version from ZIP:** Import versions from existing ZIP files.
 
-1. Click **Restore Version**.
-2. Select a version from the dropdown list.
-3. Confirm your selection.
-4. The application will overwrite the current project files with those from the selected version.
+**User Interface:**
 
-**Warning**: Restoring will overwrite existing files. Make sure to back up any unsaved changes.
+![GUI Screenshot](https://your-image-link.com/screenshot.png)
 
-### Archiving a Version
+*(Replace with an actual screenshot of the application)*
 
-1. Click **Archive Version**.
-2. Select a version from the dropdown list.
-3. Confirm your selection.
-4. The application will:
-   - Create a ZIP archive of the selected version.
-   - Move it to the `Archived_Versions` folder.
-   - Delete the original version folder.
+---
 
-### Extracting a Version from ZIP
+## ⚙️ Building Executables
 
-1. Click **Extract Version from ZIP**.
-2. Browse and select the ZIP file you wish to extract.
-3. The contents will be extracted to an `extracted_version` folder.
+Distribute **Project Version Manager** without requiring users to install Python or dependencies using **PyInstaller**.
 
-## Supported Languages
+### 🛠️ Prerequisites
 
-The application processes code files with the following extensions:
-
-- Python (`.py`)
-- Java (`.java`)
-- C (`.c`)
-- C++ (`.cpp`)
-- C# (`.cs`)
-- JavaScript (`.js`)
-- TypeScript (`.ts`)
-- HTML (`.html`)
-- CSS (`.css`)
-- PHP (`.php`)
-- Ruby (`.rb`)
-- Go (`.go`)
-- Swift (`.swift`)
-- Kotlin (`.kt`)
-- Rust (`.rs`)
-
-## Building Executables
-
-You can create standalone executables for Windows, Linux, and macOS using PyInstaller.
-
-### Install PyInstaller
+Install PyInstaller within your virtual environment:
 
 ```bash
 pip install pyinstaller
 ```
 
-### Windows
+### 🖥️ Building on Different OS
 
-1. **Build the Executable**:
+#### **Windows**
 
+1. **Navigate to Project Directory:**
    ```bash
-   pyinstaller --onefile --windowed version_manager.py
+   cd C:\path\to\ProjectVersionManager
    ```
 
-2. **Locate the Executable**:
-
-   The executable will be in the `dist` folder as `version_manager.exe`.
-
-### Linux
-
-1. **Build the Executable**:
-
+2. **Build Executable:**
    ```bash
-   pyinstaller --onefile --windowed version_manager.py
+   pyinstaller --onefile --windowed Concatcode.py
    ```
 
-2. **Make Executable**:
+3. **Retrieve Executable:**
+   - Located at `dist\Concatcode.exe`
 
+4. **Run:**
+   - Double-click `Concatcode.exe` to launch.
+
+#### **Mac OS**
+
+1. **Navigate to Project Directory:**
    ```bash
-   chmod +x dist/version_manager
+   cd /path/to/ProjectVersionManager
    ```
 
-3. **Run the Executable**:
-
+2. **Build Application Bundle:**
    ```bash
-   ./dist/version_manager
+   pyinstaller --onefile --windowed Concatcode.py
    ```
 
-### macOS
+3. **Retrieve Application:**
+   - Located at `dist/Concatcode.app`
 
-1. **Build the Executable**:
+4. **Run:**
+   - Double-click `Concatcode.app`
 
+   *If blocked, right-click and select **Open**, then **Open** again in the dialog.*
+
+#### **Linux**
+
+1. **Navigate to Project Directory:**
    ```bash
-   pyinstaller --onefile --windowed version_manager.py
+   cd /path/to/ProjectVersionManager
    ```
 
-2. **Locate the Application**:
+2. **Build Executable:**
+   ```bash
+   pyinstaller --onefile Concatcode.py
+   ```
 
-   The application bundle will be in the `dist` folder.
+3. **Retrieve Executable:**
+   - Located at `dist/Concatcode`
 
-**Note**: PyInstaller must be run on the target operating system to build the executable for that system.
+4. **Set Permissions and Run:**
+   ```bash
+   chmod +x dist/Concatcode
+   ./dist/Concatcode
+   ```
 
-## Contributing
+### 🔍 Additional Tips
 
-Contributions are welcome! Please open an issue or submit a pull request on GitHub.
-
-## License
-
-This project is licensed under the MIT License.
-
----
-
-**Disclaimer**: This tool is intended for basic version management and should not replace full-fledged version control systems like Git.
-
-# How to Use the Project Version Manager
-
-## Introduction
-
-The Project Version Manager is a user-friendly application designed to help you manage different versions of your project code. It's especially useful for small projects or individual developers who need a simple way to keep track of code changes without the complexity of a full version control system.
-
-## Step-by-Step Guide
-
-### 1. Preparing Your Environment
-
-- **Ensure that your project is organized**: The script assumes that your project files are located in the parent directory relative to where the script is placed.
-- **Check your files**: The application will process code files with extensions listed in the [Supported Languages](#supported-languages) section.
-
-### 2. Launching the Application
-
-- Run the application using:
-
+- **Include Additional Files:**
   ```bash
-  python version_manager.py
+  pyinstaller --onefile --windowed Concatcode.py --add-data "path/to/datafile:destination_folder"
+  ```
+  - **Windows:** Use `;` as separator.
+  - **Mac OS & Linux:** Use `:` as separator.
+
+- **Handle Hidden Imports:**
+  ```bash
+  pyinstaller --onefile --windowed Concatcode.py --hidden-import module_name
   ```
 
-- Alternatively, if you've built an executable, double-click the executable file.
-
-### 3. Saving a Version
-
-- Click on **Save Version**.
-- The application will automatically:
-  - Generate a new version number.
-  - Concatenate all code files into a single text file for easy viewing.
-  - Copy individual code files into a `Source` folder within the version folder.
-  - Create a ZIP backup of your entire project.
-- A confirmation message will appear once the process is complete.
-
-### 4. Restoring a Version
-
-- Click on **Restore Version**.
-- A dialog will appear with a dropdown menu of available versions.
-- Select the version you wish to restore and click **OK**.
-- The application will overwrite the current project files with those from the selected version.
-- **Important**: Ensure you've backed up any unsaved changes before restoring.
-
-### 5. Archiving a Version
-
-- Click on **Archive Version**.
-- Select the version you wish to archive from the dropdown menu and click **OK**.
-- The application will:
-  - Create a ZIP archive of the selected version.
-  - Move the archive to the `Archived_Versions` folder.
-  - Delete the original version folder to save space.
-- A confirmation message will appear upon completion.
-
-### 6. Extracting a Version from ZIP
-
-- Click on **Extract Version from ZIP**.
-- Browse to the ZIP file you want to extract and select it.
-- The contents will be extracted to a folder named `extracted_version`.
-- You can then manually move or copy these files to your project directory as needed.
-
-## Tips and Best Practices
-
-- **Regular Saves**: Save versions regularly, especially before making significant changes.
-- **Archiving**: Archive older versions to keep your working directory clean and save disk space.
-- **Backup**: Although the application creates backups, it's good practice to maintain additional backups of your project.
-
-## Troubleshooting
-
-- **No Versions Available**: If you try to restore or archive and no versions are listed, ensure you've saved at least one version.
-- **File Overwrites**: Restoring a version will overwrite current files. Always back up current work if unsure.
-- **Permission Errors**: If you encounter permission issues, try running the application with administrative privileges.
-
-## Contact
-
-If you have any questions or need support, please contact [your.email@example.com](mailto:your.s.medjaher@gmail.com).
+- **Advanced Configurations:**
+  - Modify the generated `.spec` file and rebuild:
+    ```bash
+    pyinstaller Concatcode.spec
+    ```
 
 ---
 
+## 🐛 Troubleshooting
+
+### **Import Errors: PyQt5 Not Found**
+
+**Error Message:**
+```
+Import "PyQt5.QtWidgets" could not be resolved Pylance reportMissingImports
+```
+
+**Solutions:**
+
+1. **Install PyQt5:**
+   ```bash
+   pip install PyQt5
+   ```
+
+2. **Verify Installation:**
+   ```bash
+   python -c "import PyQt5"
+   ```
+
+3. **Configure Your IDE:**
+   - **Visual Studio Code:**
+     - Select the correct Python interpreter.
+     - Restart VS Code.
+
+4. **Restart Your IDE:**
+   - Sometimes necessary to recognize new installations.
+
+### **Executable Not Running**
+
+**Possible Causes:**
+
+- Missing dependencies.
+- Incorrect build process.
+
+**Solutions:**
+
+1. **Rebuild Executable:**
+   ```bash
+   pyinstaller --onefile --windowed Concatcode.py
+   ```
+
+2. **Check Build Errors:**
+   - Review terminal output for issues.
+
+3. **Test in Development:**
+   ```bash
+   python Concatcode.py
+   ```
+
+4. **Include Hidden Imports:**
+   ```bash
+   pyinstaller --onefile --windowed Concatcode.py --hidden-import module_name
+   ```
+
+---
+
+## 🤝 Contributing
+
+Contributions are highly appreciated! Here's how you can contribute:
+
+1. **Fork the Repository:**
+   - Click the "Fork" button on the repository page.
+
+2. **Clone Your Fork:**
+   ```bash
+  https://github.com/Duperopope/ConcatCode.git
+   ```
+
+3. **Create a New Branch:**
+   ```bash
+   git checkout -b feature/YourFeatureName
+   ```
+
+4. **Implement Your Changes:**
+   - Add features or fix bugs.
+
+5. **Commit Your Changes:**
+   ```bash
+   git commit -m "Add your commit message"
+   ```
+
+6. **Push to Your Fork:**
+   ```bash
+   git push origin feature/YourFeatureName
+   ```
+
+7. **Create a Pull Request:**
+   - Navigate to your fork and click "Compare & pull request".
+
+**Please ensure your contributions follow the project's coding standards and include appropriate documentation and tests.**
+
+---
+
+## 📄 License
+
+This project is open-source and available under the [MIT License](LICENSE).
+
+---
+
+## 📫 Contact
+
+Developed by **Samir Medjaher**. If you have any questions, suggestions, or need support, feel free to reach out:
+
+📧 **Email:** [s.medjaher@gmail.com](mailto:s.medjaher@gmail.com)
+
+---
+
+Thank you for checking out **Project Version Manager**! Your support and feedback are invaluable in making this tool even better. Happy versioning! 🎉
+
+---
+
+**[![Open Source Love](https://badges.frapsoft.com/os/v1/open-source.png?v=103)](https://opensource.org/) [![GitHub Stars](https://img.shields.io/github/stars/your_username/ProjectVersionManager?style=social)](https://github.com/your_username/ProjectVersionManager)**
+
+*(Replace `your_username` with your actual GitHub username and update links accordingly.)*
+
+---
+
+Feel free to share your thoughts, ask questions, or suggest improvements in the comments below!
