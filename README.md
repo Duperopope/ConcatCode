@@ -273,4 +273,8 @@ The Project Version Manager is a user-friendly application designed to help you 
 
 ## Contact
 
-If you have any questions or need support, please contact [your.email@example.com](mailto:your.s.medjaher@gmail.com).
+If you have any questions or need support, please contact [s.medjaher@egmail.com.com](mailto:your.email@example.com).
+
+---
+
+By following this guide, you should be able to effectively use the Project Version Manager to manage your project files across different versions with ease.
