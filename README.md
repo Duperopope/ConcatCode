@@ -274,5 +274,3 @@ The Project Version Manager is a user-friendly application designed to help you 
 ## Contact
 
 If you have any questions or need support, please contact [your.email@example.com](mailto:your.s.medjaher@gmail.com).
-
----
